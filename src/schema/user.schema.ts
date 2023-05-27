@@ -11,3 +11,10 @@ export const createUserSchema = Joi.object({
     email: Joi.string().email().required().error(new Error('Email is required'))
   })
 });
+
+export const createUserSessionSchema = Joi.object({
+  body: Joi.object({
+    username: Joi.string().required().error(new Error('Username is required')),
+    password: Joi.string().required().error(new Error('Password is required'))
+  })
+});

@@ -11,7 +11,6 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 app.listen(port, host, () => {
   log.info(`Server running at http://${host}:${port}`);
 
