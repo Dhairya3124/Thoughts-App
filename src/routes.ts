@@ -18,6 +18,8 @@ import {
   getThoughtSchema,
   deleteThoughtSchema
 } from './schema/thoughts.schema';
+import { createReplySchema, deleteReplySchema, getReplySchema } from './schema/reply.schema';
+import { createRepliesHandler, getRepliesHandler, deleteRepliesHandler } from './controllers/reply.controller';
 
 export default function (app: Express) {
   app.get('/appcheck', (req: Request, res: Response) => {
@@ -55,4 +57,26 @@ export default function (app: Express) {
     [checkauth, validateRequest(deleteThoughtSchema)],
     deleteThoughtsHandler
   );
+  // Adding Replies Routes - Create Replies
+  app.post(
+    '/api/addreplies',
+    [checkauth, requiresUser, validateRequest(createReplySchema)],
+    createRepliesHandler
+  );
+  // Adding Replies Routes - Get all replies
+  app.get(
+    '/api/getreplies',
+    [checkauth, validateRequest(getReplySchema)],
+    getRepliesHandler
+  );
+
+  // Deleting the replies - Delete replies
+  app.delete(
+    '/api/deletereplies',
+    [checkauth, validateRequest(deleteReplySchema)],
+    deleteRepliesHandler
+  );
+
+
+  
 }
